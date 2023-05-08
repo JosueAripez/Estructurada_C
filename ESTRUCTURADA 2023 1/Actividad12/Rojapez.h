@@ -82,7 +82,7 @@ void Vali_Cadena(char * cadena,char msge[])
 	cadena [i] = '\0';
 }
 
-int busqSecOrd(int v[],int n,int num)
+int Bus_Sec_Ord(int v[],int n,int num)
 {
 	int i;
 	
@@ -101,7 +101,7 @@ int busqSecOrd(int v[],int n,int num)
 	return -1;
 }
 
-int busqSec(int v[],int n,int num)
+int Busqueda_Secuencial(int v[],int n,int num)
 {
 	int i;
 	
@@ -116,7 +116,7 @@ int busqSec(int v[],int n,int num)
 	return -1;
 }
 
-void OrdVec(int vect[],int tam)
+void Ordena_Vec(int vect[],int tam)
 {
 	int i, temp, j = 0;
     
@@ -145,4 +145,27 @@ void Vali_Espacios(char * cadena)
        	    printf("%c",cadena[i]);
 		}
 	}
+}
+
+bool Vali_Txt(char *cadena)
+{
+    int i = 0;
+    bool status = false;
+
+	do
+	{
+	   	if (isalpha(cadena[i]) || cadena[i]=='_' || cadena[i]=='-' || isdigit(cadena[i]))
+	   	{
+	   		cadena[i] == cadena [i];
+	   		status = false;
+	   		i++;
+		}
+		else
+		{
+			printf("Imgresa otro nombre\n",130);
+			status = true;
+		}
+	}while(cadena[i]!='\0' && status == false);
+
+	return status;
 }
