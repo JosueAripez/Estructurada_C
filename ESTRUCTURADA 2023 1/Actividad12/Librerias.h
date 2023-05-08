@@ -5,6 +5,11 @@
 #include <time.h>
 #include <stdbool.h>
 
+#define TRUE 1
+#define FALSE 0
+#define ENCONTRADO 1
+#define NOENCONTRADO 0
+
 /*----------------------------------------------------------------------------------------------------                                                                            
                                                                                            
           JJJJJJJJJJJ                                                                      
