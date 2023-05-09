@@ -98,7 +98,6 @@ void menu()
             case 5:
               	printf("\nOrdenando....\n");
               	Ord_Reg(vect,i);
-              	//ord = true;
               	system("PAUSE");
             break;
               
