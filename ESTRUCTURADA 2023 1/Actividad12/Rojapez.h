@@ -3,8 +3,40 @@
 #include <string.h>
 #include <math.h>
 #include <time.h>
+#include <stdbool.h>
 
-int Vali_Num(int ri,int rf,char msge[],char msgeError[])
+#define TRUE 1
+#define FALSE 0
+#define ENCONTRADO 1
+#define NOENCONTRADO 0
+#define ESP 32
+#define ENTER 13
+#define ESC 27
+
+bool ValidTxt(char *cadena)
+{
+    int i = 0;
+    bool status = false;
+
+	do
+	{
+	   	if (isalpha(cadena[i]) || cadena[i]=='_' || cadena[i]=='-' || isdigit(cadena[i]))
+	   	{
+	   		cadena[i] == cadena [i];
+	   		status = false;
+	   		i++;
+		}
+		else
+		{
+			printf("Los nombres de archivos .txt solamente aceptan caracteres alfanum%cricos y guiones.\n\n",130);
+			status = true;
+		}
+	}while(cadena[i]!='\0' && status == false);
+
+	return status;
+}
+
+int Val_Int(int ri,int rf,char msge[],char msgeError[])
 {
 	int num;
 	char xnum[30];
@@ -26,7 +58,7 @@ int Vali_Num(int ri,int rf,char msge[],char msgeError[])
 	return num;
 }
 
-long Vali_Long(long ri,long rf,char msge[],char msgeError[])
+long Val_Long(long ri,long rf,char msge[],char msgeError[])
 {
 	long num;
 	char xnum[30];
@@ -48,7 +80,7 @@ long Vali_Long(long ri,long rf,char msge[],char msgeError[])
 	return num;
 }
 
-void Vali_Cadena(char * cadena,char msge[])
+void Val_Cadena(char * cadena,char msge[])
 {
 	int i=0;
 	char ola;
@@ -58,7 +90,7 @@ void Vali_Cadena(char * cadena,char msge[])
 		ola = getc(stdin);
 		if((ola>='a' && ola<='z') || (ola>='A' && ola<='Z' || ola == ' '))
 		{
-		  	if (cadena[i-1] == ' ' && ola == ' ')
+			if (cadena[i-1] == ' ' && ola == ' ')
 		  	{
 			}
 			else
@@ -69,11 +101,11 @@ void Vali_Cadena(char * cadena,char msge[])
 				else
 				{
 					cadena[i] = ola;
-		  		    i++;
+		  			i++;
 				}
 			}
 		}
-	} while (ola!='\n');
+	}while (ola!='\n');
 	
 	if (cadena[i-1] == ' ')
 	{
@@ -82,7 +114,7 @@ void Vali_Cadena(char * cadena,char msge[])
 	cadena [i] = '\0';
 }
 
-int Bus_Sec_Ord(int v[],int n,int num)
+int busqSecOrd(int v[],int n,int num)
 {
 	int i;
 	
@@ -101,7 +133,7 @@ int Bus_Sec_Ord(int v[],int n,int num)
 	return -1;
 }
 
-int Busqueda_Secuencial(int v[],int n,int num)
+int busqSec(int v[],int n,int num)
 {
 	int i;
 	
@@ -116,7 +148,7 @@ int Busqueda_Secuencial(int v[],int n,int num)
 	return -1;
 }
 
-void Ordena_Vec(int vect[],int tam)
+void OrdVec(int vect[],int tam)
 {
 	int i, temp, j = 0;
     
@@ -134,7 +166,20 @@ void Ordena_Vec(int vect[],int tam)
 	}
 }
 
-void Vali_Espacios(char * cadena)
+void Mayus(char * cadena)
+{
+	int i;
+	
+	for(i = 0;cadena[i] != '\0';i++)
+	{
+	   	if (cadena[i] >= 'a' && cadena[i] <= 'z')
+	   	{
+	   		cadena[i] -= 32;
+		}
+	}
+}
+
+void Espacios(char * cadena)
 {
 	int i;
 
@@ -147,25 +192,36 @@ void Vali_Espacios(char * cadena)
 	}
 }
 
-bool Vali_Txt(char *cadena)
+int check (int n, int vect[], int tama)
 {
-    int i = 0;
-    bool status = false;
-
-	do
+	int i;
+	for (i=0; i<=tama; i++)
 	{
-	   	if (isalpha(cadena[i]) || cadena[i]=='_' || cadena[i]=='-' || isdigit(cadena[i]))
-	   	{
-	   		cadena[i] == cadena [i];
-	   		status = false;
-	   		i++;
-		}
-		else
+		if (n==vect[i])
 		{
-			printf("Imgresa otro nombre\n",130);
-			status = true;
+			return 1;
 		}
-	}while(cadena[i]!='\0' && status == false);
-
-	return status;
+	}
+	return 0;
 }
+
+/*----------------------------------------------------------------------------------------------------                                                                            
+                                                                                           
+          JJJJJJJJJJJ                                                                      
+          J:::::::::J                                                                      
+          J:::::::::J                                                                      
+          JJ:::::::JJ                                                                      
+            J:::::J   ooooooooooo       ssssssssss   uuuuuu    uuuuuu      eeeeeeeeeeee    
+            J:::::J oo:::::::::::oo   ss::::::::::s  u::::u    u::::u    ee::::::::::::ee  
+            J:::::Jo:::::::::::::::oss:::::::::::::s u::::u    u::::u   e::::::eeeee:::::ee
+            J:::::jo:::::ooooo:::::os::::::ssss:::::su::::u    u::::u  e::::::e     e:::::e
+            J:::::Jo::::o     o::::o s:::::s  ssssss u::::u    u::::u  e:::::::eeeee::::::e
+JJJJJJJ     J:::::Jo::::o     o::::o   s::::::s      u::::u    u::::u  e:::::::::::::::::e 
+J:::::J     J:::::Jo::::o     o::::o      s::::::s   u::::u    u::::u  e::::::eeeeeeeeeee  
+J::::::J   J::::::Jo::::o     o::::ossssss   s:::::s u:::::uuuu:::::u  e:::::::e           
+J:::::::JJJ:::::::Jo:::::ooooo:::::os:::::ssss::::::su:::::::::::::::uue::::::::e          
+ JJ:::::::::::::JJ o:::::::::::::::os::::::::::::::s  u:::::::::::::::u e::::::::eeeeeeee  
+   JJ:::::::::JJ    oo:::::::::::oo  s:::::::::::ss    uu::::::::uu:::u  ee:::::::::::::e  
+     JJJJJJJJJ        ooooooooooo     sssssssssss        uuuuuuuu  uuuu    eeeeeeeeeeeeee  
+
+/---------------------------------------------------------------------------------------------------*/

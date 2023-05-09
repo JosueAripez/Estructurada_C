@@ -18,7 +18,7 @@ void menu();
 
 
 Tsalumno Gen_Aleatorio();
-//void Cargar_Archivo(FILE *archi, Tsalumno *v, int tam)
+void Cargar_Archi(FILE * archi, Tsalumno *v, int tam);
 void Elim_Reg(Tsalumno v[],int n);
 void Busc_Reg(Tsalumno v[],int n,bool orden);
 void Ord_Reg(Tsalumno v[],int n,int orden);
@@ -65,15 +65,7 @@ void menu()
         {
            	case 1:
            	  	printf("\nCargando Archivo....\n");
-			/*	if(i < N-1500)
-				{
-					for(j=0; j<1500; j++, i++)
-					{
-						vect[i] = Gen_Aleatorio();
-					}
-				}
-				printf("Se crearon 1500 registros correctamente\n");
-				ord = false;*/
+                void Cargar_Archi(FILE * archi, Tsalumno *v, int tam);
 				system("PAUSE");
             break;
               
@@ -126,6 +118,34 @@ void menu()
     }while (op != 0);
 }
 
+void Cargar_Archi(FILE * archi, Tsalumno *v, int tam)
+{
+    char temp[10];
+    int n = 0;
+    Tsalumno reg;
+
+    archi = fopen("datos.txt","r");
+
+    if (archi)
+    {
+        while (!feof(archi))
+        {
+            fscanf(archi,"%s%ld%s%s%s%d%s", &temp, &reg.matricula, &reg.nombre, &reg.ap_pa, &reg.ap_ma, &reg.edad, &reg.sexo);
+            v[n] = reg;
+            n++;
+        }
+        fclose(archi);
+        
+    }
+    else
+    {
+        printf("El archivo no existe");
+    }
+    tam = n;
+    return tam;
+    
+}
+
 Tsalumno Gen_Aleatorio()
 {
 	Tsalumno reg;
@@ -164,20 +184,20 @@ void Elim_Reg(Tsalumno v[],int n)
 	bool encon;
 	
 	system("CLS");
-	matricula = Val_Long(300000,100000000,"¿Que matricula buscas? ","Ese numero no es valido");
+	matricula = Val_Long(300000,100000000,"¿Que matricula buscas? ","Matricula no valida");
 	
 	for(i=0;(i<n )&&(v[i].matricula != matricula);i++)
 	{
 	}
-			if(i == n)
-	          {
-		   	        printf("Esa matricula no se encuentra en el sistema.\n");
-	          }
-	          else
-	          {
-			        v[i].estado = 'I';
-			        printf("\nEstado: Inactivo\n");
-	          }
+	if(i == n)
+	{
+		printf("Matricula no existente\n");
+	}
+	else
+	{
+		v[i].estado = 'I';
+		printf("\nEstado: Inactivo\n");
+	}
 	
 }
 
@@ -189,24 +209,23 @@ void Busc_Reg(Tsalumno v[],int n,bool orden)
 	
 	system("CLS");
 	band = TRUE;
-	matricula = Val_Long(300000,100000000,"¿Que matricula buscas? ","Ese numero no es valido");
+	matricula = Val_Long(300000,100000000,"¿Que matricula buscas? ","Matricula no valida");
 	
 	for(i=0;(i<n)&&(encon == false);i++)
+	{
+		if(matricula == v[i].matricula)
 		{
-			if(matricula == v[i].matricula)
-			  {
-					printf("\n------Registro Encontrado------\n");
-					printf("%5s\t%8s\t%8s\t%8s\t%8s\t%8s\t%8s\n","No.Registro","Matricula","Nombre","Ap Paterno","Ap Materno","Edad","Sexo");
-					printf("%5d\t%16ld\t%8s\t%8s\t%8s\t%8d\t%8c\n",i,v[i].matricula,v[i].nombre,v[i].ap_pa,v[i].ap_ma,v[i].edad,v[i].sexo);
-					printf("\n");
-					encon = true;
-			  }
+			printf("%5s\t%8s\t%8s\t%8s\t%8s\t%8s\t%8s\n","No.Registro","Matricula","Nombre","Ap Paterno","Ap Materno","Edad","Sexo");
+			printf("%5d\t%16ld\t%8s\t%8s\t%8s\t%8d\t%8c\n",i,v[i].matricula,v[i].nombre,v[i].ap_pa,v[i].ap_ma,v[i].edad,v[i].sexo);
+			printf("\n");
+			encon = true;
 		}
+	}
 					
-		if(encon == false)
-		  {
-				printf("Esa matricula no se encuentra en el sistema\n");
-		  }	
+	if(encon == false)
+	{
+		pprintf("Matricula no existente\n");
+	}	
 }
 
 void Ord_Reg(Tsalumno v[],int n,int orden)
@@ -216,51 +235,51 @@ void Ord_Reg(Tsalumno v[],int n,int orden)
 	Tsalumno tempo;
     
     if(orden == 1)
-      {
+    {
     	if(N <= 500)
-	      {
-		        for (i = n/2; i > 0; i = i / 2)
-    		        {
-       			        for (j = i; j < n; j++)
-        		            {
-            			        for(k = j - i; k >= 0; k = k - i)
-            			           {
-                			            if (v[k+i].matricula >= v[k].matricula)
-                			               {
-                				                break;
-							               }
-                			               else
-                			               {
-                   				                tempo = v[k];
-                				                v[k] = v[k+i];
-                   				                v[k+i] = tempo;
-                			               }
-            			           }
-        			        }
-    			    }
-	      }
-	      else
-	      {
-		        if(N > 500)
-		          {
-			            for (i = 0; i <= n; i++)
-                            {
-    	                        for (j = 0; j <= n - i; j++)
-	                                {
-			                            if (v[j].matricula < v[j + 1].matricula)
-			                               {
-				                                tempo = v[j];
-				                                v[j] = v[j + 1];
-				                                v[j + 1] = tempo;	
-			                               }  	
-		                            } 	
-	                        }
-		          }
-	      }
+	    {
+		    for (i = n/2; i > 0; i = i / 2)
+    		{
+       			for (j = i; j < n; j++)
+        		{
+            		for(k = j - i; k >= 0; k = k - i)
+            		{
+                		if (v[k+i].matricula >= v[k].matricula)
+                		{
+                			 break;
+						}
+                		else
+                		{
+                   			tempo = v[k];
+                			v[k] = v[k+i];
+                   			v[k+i] = tempo;
+                		}
+            		}
+        		}
+    		}
+	    }
+	    else
+	    {
+		    if(N > 500)
+		    {
+			    for (i = 0; i <= n; i++)
+                {
+    	            for (j = 0; j <= n - i; j++)
+	                {
+			            if (v[j].matricula < v[j + 1].matricula)
+			            {
+				            tempo = v[j];
+				            v[j] = v[j + 1];
+				            v[j + 1] = tempo;	
+			            }  	
+		            } 	
+	            }
+		    }
+	    }
 	}
 	else
     {
-  	   printf("No es necesario ordenarlo, ya lo esta\n\n");
+  	   printf("Ya esta ordenado\n");
     }
 }
 
@@ -270,12 +289,12 @@ void Imprim_Reg(Tsalumno v[],int n)
 	system("CLS");
 	printf("%5s\t%10s\t%8s\t%8s\t%8s\t%8s\t%8s\n","No.Registro","Matricula","Nombre","Ap Paterno","Ap Materno","Edad","Sexo");
 	for(i=0;i < n;i++)
-	   {
-	   		if (v[i].estado == 'A')
-	   		   {
-	   		   		printf("%5d\t%16ld\t%8s\t%8s\t%8s\t%8d\t%8c\n",i,v[i].matricula,v[i].nombre,v[i].ap_pa,v[i].ap_ma,v[i].edad,v[i].sexo);
-			   }
-	   }
+	{
+	   	if (v[i].estado == 'A')
+	   	{
+	   		printf("%5d\t%16ld\t%8s\t%8s\t%8s\t%8d\t%8c\n",i,v[i].matricula,v[i].nombre,v[i].ap_pa,v[i].ap_ma,v[i].edad,v[i].sexo);
+		}
+	}
 }
 
 void Gen_Txt(Tsalumno v[],int n)
@@ -300,16 +319,16 @@ void Gen_Txt(Tsalumno v[],int n)
 	
 	archi = fopen(nom_archi,"w");
 	if (archi == NULL)
-       {
-            printf("No se puede abrir el archivo");
-       }
+    {
+        printf("No se puede abrir el archivo");
+    }
 	
 	for(i = 0;i < n;i++)
-	   {
-	   		if (v[i].estado == 'A')
-	   		   {
-	   		   		fprintf(archi,"%8d\t%8ld\t%8s\t%8s\t%8s\t%8d\t%8c\n",i,v[i].matricula,v[i].nombre,v[i].ap_pa,v[i].ap_ma,v[i].edad,v[i].sexo);
-			   }
-	   }
+	{
+	    if (v[i].estado == 'A')
+	   	{
+	   		fprintf(archi,"%8d\t%8ld\t%8s\t%8s\t%8s\t%8d\t%8c\n",i,v[i].matricula,v[i].nombre,v[i].ap_pa,v[i].ap_ma,v[i].edad,v[i].sexo);
+		}
+	}
 	fclose(archi);
 }
