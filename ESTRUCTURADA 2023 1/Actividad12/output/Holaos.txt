@@ -1,0 +1,10 @@
+       0	  333548	  Blanca	   Leyva	Bustamante	      25	       M
+       1	  356007	  Henrry	  Aripez	  Robins	      21	       H
+       2	  335155	  Carlos	    Grey	Trujillo	      25	       H
+       3	  357240	 Jessica	Escamilla	    Grey	      24	       M
+       4	  330822	 Abraham	Bañuelos	  Robins	      22	       H
+       5	  333085	    Alex	  Aripez	 Herrera	      22	       H
+       6	  338151	  Henrry	  Aripez	Beristain	      24	       H
+       7	  331413	  Nilton	Bustamante	Escamilla	      23	       H
+       8	  362200	 America	  Robins	  Robins	      22	       M
+       9	  359280	Fernanda	 Rojapez	Bañuelos	      20	       M

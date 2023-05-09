@@ -7,11 +7,6 @@
 
 #define TRUE 1
 #define FALSE 0
-#define ENCONTRADO 1
-#define NOENCONTRADO 0
-#define ESP 32
-#define ENTER 13
-#define ESC 27
 
 bool ValidTxt(char *cadena)
 {
