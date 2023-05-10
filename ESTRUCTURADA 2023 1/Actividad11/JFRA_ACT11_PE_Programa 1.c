@@ -79,7 +79,7 @@ void menu()
             case 2:
 				system("CLS");
     			printf("Eliminando....\n");
-    			Elim_Reg(vect,n);
+    			Elim_Reg(vect,i); 
 				system("PAUSE");
     			break;
               
@@ -107,7 +107,7 @@ void menu()
 			case 6:
 				system("CLS");
     			printf("Creando archivo de texto....\n");
-    			Gen_Txt(vect,n);
+    			Gen_Txt(vect,i);
     			system("PAUSE");
     			break;
         }
@@ -161,14 +161,14 @@ void Elim_Reg(Tsalumno v[],int n)
 	bool encon;
 	
 	system("CLS");
-	matricula = Vali_Long(300000,100000000,"¿Que matricula buscas? ","Ese numero no es valido");
+	matricula = Val_Long(300000,100000000,"¿Que matricula buscas? ","Matricula no encontrada");
 	
 	for(i=0;(i<n )&&(v[i].matricula != matricula);i++)
 	{
 	}
 	if(i == n)
 	{
-		printf("Esa matricula no se encuentra en el sistema.\n");
+		printf("Matricula inexsistente\n");
 	}
 	else
 	{
@@ -243,7 +243,7 @@ void Gen_Txt(Tsalumno v[],int n)
 	
 	do
 	{
-		printf("Ingresa el nombre de su archivo: ");
+		printf("Ingrese el nombre de su archivo: ");
 		fflush(stdin);
 		gets(nom_archi);
 		stat = ValidTxt(nom_archi);
@@ -254,16 +254,16 @@ void Gen_Txt(Tsalumno v[],int n)
 	
 	archi = fopen(nom_archi,"w");
 	if (archi == NULL)
-    {
-        printf("No se puede abrir el archivo");
-    }
+       {
+            printf("No se puede abrir el archivo");
+       }
 	
 	for(i = 0;i < n;i++)
-	{
-		if (v[i].estado == 'A')
-		{
-			fprintf(archi,"%8d\t%8ld\t%8s\t%8s\t%8s\t%8d\t%8c\n",i,v[i].matricula,v[i].nombre,v[i].ap_pa,v[i].ap_ma,v[i].edad,v[i].sexo);
-		}
-	}
+	   {
+	   		if (v[i].estado == 'A')
+	   		   {
+	   		   		fprintf(archi,"%8d\t%8ld\t%8s\t%8s\t%8s\t%8d\t%8c\n",i,v[i].matricula,v[i].Nombre_s,v[i].Apellido_Paterno,v[i].Apellido_Materno,v[i].Edad,v[i].Sexo);
+			   }
+	   }
 	fclose(archi);
 }
