@@ -20,10 +20,6 @@ void Gen_U();
 void Agrega_U();
 void Imprime_U();
 int menu();
-//int vali_num(int ri, int rf, char msg[]);
-//int vali_Cont1(char contsenia[], int ri, int rf);
-//int vali_Cont2(char contsenia[], int ri, int rf);
-//int vali_Cont3(char contsenia[], int ri, int rf);
 
 int main()
 {
