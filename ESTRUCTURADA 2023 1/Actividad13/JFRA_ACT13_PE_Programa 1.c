@@ -16,8 +16,8 @@ typedef struct _alumno{
 int msges();
 void menu();
 
-Tsalumno Gen_Manual();
 Tsalumno Gen_Aleatorio();
+
 void Imprim_Reg(Tsalumno v[],int n);
 void Ord_Reg(Tsalumno v[],int n,bool orden);
 void Busc_Reg(Tsalumno v[],int n,bool orden);
@@ -38,17 +38,17 @@ int msges()
 {
 	int op;
 	system("CLS");
-	printf ("------------Menu---------- \n");
-    printf("1.- Agregar \n");
-    printf("2.- Agregar Manual \n");
-    printf("3.- Eliminar registro \n");
-    printf("4.- Buscar \n");
-    printf("5.- Ordenar \n");
-    printf("6.- Imprimir \n");
-    printf("7.- Generar Archivo de Texto \n");
-    printf("8.- Ver Archivo de Texto \n");
-    printf("9.- Generar Archivo Binario \n");
-    printf("10.- Cargar Archivo Binario \n");
+	printf ("-----------------MENU-----------------\n");
+    printf("1.- Agregar\n");
+    printf("2.- Editar Registro\n");
+    printf("3.- Eliminar Registro\n");
+    printf("4.- Buscar\n");
+    printf("5.- Ordenar\n");
+    printf("6.- Imprimir\n");
+    printf("7.- Generar Archivo de Texto\n");
+    printf("8.- Ver Archivo de Texto\n");
+    printf("9.- Crear Archivo Binario\n");
+    printf("10.- Cargar Archivo Binario\n");
     printf("0.- Salir\n\n");
     op = Val_Int(0,10,"Ingresa una opcion","Esa opcion no es valida");
     return op;
@@ -68,7 +68,7 @@ void menu()
         switch (op)
         {
            	case 1:
-           	  	printf("\n-------Agregar------\n");
+           	  	printf("\nAgregando....\n");
 				if(i < N-2200)
 				{
 					for(j=0;j<2200;j++,i++)
@@ -82,66 +82,56 @@ void menu()
             break;
               
             case 2:
-              	printf("\n-------Agregar Manual------\n");
-				printf("Cuantos registros desea ingresar?\n");
-				scanf("%d",&num);
-				  
-				if(i < N-num)
-				{
-					for(j = 0;j < num;j++,i++)
-				 	{
-						vect[i] = Gen_Manual();
-					}
-				}
-				ord = false;
+              	printf("\nEditando....\n");
+				
 				system("PAUSE");
             break;
               
             case 3:
-              	printf("\n-------Eliminar------\n");
+              	printf("\nEliminando....\n");
               	Elim_Reg(vect,i);
               	system("PAUSE");
             break;
               
             case 4:
-              	printf("\n-------Buscar------\n");
+              	printf("\nBuscando....\n");
               	Busc_Reg(vect,i,ord);
               	system("PAUSE");
             break;
               
             case 5:
-              	printf("\n-------Ordenar------\n");
+              	printf("\nOrdenando....\n");
               	Ord_Reg(vect,i,ord);
               	ord = true;
               	system("PAUSE");
             break;
               
             case 6:
-              	printf("\n-------Imprimir-------\n");
+              	printf("\nImprimiendo....\n");
               	Imprim_Reg(vect,i);
               	system("PAUSE");
             break;
               
             case 7:
-              	printf("\n-------Generar Archivo de Texto-------\n");
+              	printf("\nGenerando Archivo de Texto....\n");
               	Gen_Txt(vect,i);
               	system("PAUSE");
             break;
               
             case 8:
-              	printf("\n-------Ver Archivo de Texto---------\n");
+              	printf("\nAbriendo Archivo de Texto....\n");
               	Ver_Txt(vect,i);
               	system("PAUSE");
             break;
               
             case 9:
-              	printf("\n--------Generar Archivo Binario-------\n");
+              	printf("\nCreando Archivo Binario....\n");
               	Gen_Bin(vect,i);
               	system("PAUSE");
             break;
 
             case 10:
-              	printf("\n--------Cargar Archivo Binario---------\n");
+              	printf("\nCargando Archivo Binario....\n");
               	Cargar_Bin(vect,i);
               	system("PAUSE");
             break;
@@ -155,9 +145,9 @@ Tsalumno Gen_Aleatorio()
 	Tsalumno reg;
 	int sex;
 	char nombre[15][20];
-	char Nom_Muj[20][15] = {"Karina","Martha","Elizabeth","Maria","Lucia","Daniela","Luisa","Rebeca","Alejandra","Karla","Andrea","Ana","Julia","Victoria","Alicia"};
-	char Nom_Homb[20][15]  = {"Jorge","Alejandro","Enrique","Luis","Miguel","Angel","Victor","Sebastian","Jose","Lucas","Isaac","Eduardo","Andres","Juan","Jesus","Pedro"};
-	char Apell[20][15] = {"Vargas","Hernandez","Perez","Mora","Rivera","Juarez","Orozco","Gonzalez","Flores","Cortez","Sanchez","Diaz","Campos","Vallejo","Sosa"};
+	char Nom_Muj[20][15] = {"Blanca","Estela","Brisa","Fernanda","Yuniva","Dayany","Dayana","Jessica","America","Alexia","Julia","Ashley","Alexa","Maria","Keyla"};
+	char Nom_Homb[20][15]  = {"Josue","Francisco","Nilton","Daniel","Isaac","Abraham","Jose","Roberto","Gerrardo","Alex","Henrry","Thomas","Agustin","Norberto","Carlos"};
+	char Apell[20][15] = {"Rojas","Aripez","Rojapez","Bañuelos","Escamilla","Beristain","Leyva","Bustamante","Trujillo","Ybarra","Robins","Wilson","Grey","Shepherd","Herrera"};
 
 	system("CLS");
 	
@@ -181,43 +171,6 @@ Tsalumno Gen_Aleatorio()
 	return reg;
 }
 
-Tsalumno Gen_Manual()
-{
-	Tsalumno reg;
-	int sex,edad;
-	long matricula;
-	char Nombre[20], Ap_Pat[20], Ap_Ma[20],sexo;
-	system("CLS");
-	fflush(stdin);
-	Val_Cadena(reg.nombre,"Dame tu nombre: ");
-	fflush(stdin);
-	Val_Cadena(reg.ap_pa,"Dame tu apellido paterno: ");
-	fflush(stdin);
-	Val_Cadena(reg.ap_ma,"Dame tu apellido materno: ");
-	reg.estado = 'A';
-	reg.matricula = Val_Long(0, 100000000, "Dame tu matricula: ", "Esa matricula no es valida");
-	reg.edad = Val_Int(0,100,"Dame tu edad: ","Esa edad no es valida");
-	sex = Val_Int(0,1,"Dame tu sexo (0.- Mujer, 1.- Hombre): ","Esa no es una opcion");
-	
-	if (sex == 0)
-	   {
-			reg.sexo = 'M';
-	   }
-	else
-	{
-		if (sex == 1)
-		   {
-				reg.sexo = 'H';
-		   }
-		   else
-		   {
-			   printf("Esa no es opcion.\n");
-		   }
-	}
-	
-	return reg;
-}
-
 void Elim_Reg(Tsalumno v[],int n)
 {
 	int i;
@@ -232,7 +185,7 @@ void Elim_Reg(Tsalumno v[],int n)
 	}
 	if(i == n)
 	{
-		printf("Esa matricula no se encuentra en el sistema.\n");
+		printf("Matricula no Existente\n");
 	}
 	else
 	{
@@ -256,7 +209,6 @@ void Busc_Reg(Tsalumno v[],int n,bool orden)
 	{
 		if(matricula == v[i].matricula)
 		{
-			printf("\n------Registro Encontrado------\n");
 			printf("%5s\t%8s\t%8s\t%8s\t%8s\t%8s\t%8s\n","No.Registro","Matricula","Nombre","Ap Paterno","Ap Materno","Edad","Sexo");
 			printf("%5d\t%16ld\t%8s\t%8s\t%8s\t%8d\t%8c\n",i,v[i].matricula,v[i].nombre,v[i].ap_pa,v[i].ap_ma,v[i].edad,v[i].sexo);
 			printf("\n");
@@ -265,7 +217,7 @@ void Busc_Reg(Tsalumno v[],int n,bool orden)
 	}
 	if(encon == false)
 	{
-		printf("Esa matricula no se encuentra en el sistema\n");
+		printf("Matricula no Existente\n");
 	}	
 }
 
@@ -320,7 +272,7 @@ void Ord_Reg(Tsalumno v[],int n,bool orden)
 	}
 	else
     {
-  	   printf("No es necesario ordenarlo, ya lo esta\n\n");
+  	   printf("Vector Ordenado\n");
     }
 }
 
@@ -348,7 +300,7 @@ void Gen_Txt(Tsalumno v[],int n)
 	
 	do
 	{
-		printf("Ingrese el nombre de su archivo: ");
+		printf("Ingresa el nombre de su archivo: ");
 		fflush(stdin);
 		gets(nom_archi);
 		stat = ValidTxt(nom_archi);
@@ -409,7 +361,7 @@ void Gen_Bin(Tsalumno v[],int n)
 	do
 	{
 	
-		printf("Ingrese el nombre de su archivo: ");
+		printf("Ingresa el nombre de su archivo: ");
 		fflush(stdin);
 		gets(nom_archi);
 		stat = ValidTxt(nom_archi);
