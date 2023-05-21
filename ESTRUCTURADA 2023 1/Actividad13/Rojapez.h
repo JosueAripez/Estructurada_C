@@ -19,19 +19,19 @@ bool ValidTxt(char *cadena)
     bool status = false;
 
 	do
-	   {
-	   		if (isalpha(cadena[i]) || cadena[i]=='_' || cadena[i]=='-' || isdigit(cadena[i]))
-	   		   {
-	   		   		cadena[i] == cadena [i];
-	   		   		status = false;
-	   		   		i++;
-			   }
-			   else
-			   {
-			   		printf("Los nombres de archivos .txt solamente aceptan caracteres alfanum%cricos y guiones.\n\n",130);
-			   		status = true;
-			   }
-	   }while(cadena[i]!='\0' && status == false);
+	{
+	   	if (isalpha(cadena[i]) || cadena[i]=='_' || cadena[i]=='-' || isdigit(cadena[i]))
+	   	{
+	   		cadena[i] == cadena [i];
+	   		status = false;
+	   		i++;
+		}
+		else
+		{
+			printf("Los nombres de archivos .txt solamente aceptan caracteres alfanum%cricos y guiones.\n\n",130);
+			status = true;
+		}
+	}while(cadena[i]!='\0' && status == false);
 
 	return status;
 }
@@ -41,7 +41,8 @@ int Val_Int(int ri,int rf,char msge[],char msgeError[])
 	int num;
 	char xnum[30];
 	
-	do{
+	do
+	{
 		puts(msge);
 		fflush(stdin);
 		gets(xnum);
@@ -62,7 +63,8 @@ long Val_Long(long ri,long rf,char msge[],char msgeError[])
 	long num;
 	char xnum[30];
 	
-	do{
+	do
+	{
 		puts(msge);
 		fflush(stdin);
 		gets(xnum);
@@ -83,31 +85,32 @@ void Val_Cadena(char * cadena,char msge[])
 	int i=0;
 	char ola;
 	puts(msge);
-	do{
+	do
+	{
 		ola = getc(stdin);
 		if((ola>='a' && ola<='z') || (ola>='A' && ola<='Z' || ola == ' '))
-		  {
-		  		if (cadena[i-1] == ' ' && ola == ' ')
-		  		   {
-				   }
-				   else
-				   {
-				   		if (ola == ' ' && i == 0)
-						   {
-						   }
-						   else
-						   {
-						   		cadena[i] = ola;
-		  		    			i++;
-						   }
-				   }
-		  }
-	} while (ola!='\n');
+		{
+			if (cadena[i-1] == ' ' && ola == ' ')
+		  	{
+			}
+			else
+			{
+				if (ola == ' ' && i == 0)
+				{
+				}
+				else
+				{
+					cadena[i] = ola;
+		  			i++;
+				}
+			}
+		}
+	}while (ola!='\n');
 	
 	if (cadena[i-1] == ' ')
-	   {
-	   		cadena[i-1] = '\0';
-	   }
+	{
+	   	cadena[i-1] = '\0';
+	}
 	cadena [i] = '\0';
 }
 
@@ -121,7 +124,6 @@ int busqSecOrd(int v[],int n,int num)
 		{
 			return i;
 		}
-		
 		else
 		{
 			return -1;
@@ -171,9 +173,9 @@ void Mayus(char * cadena)
 	for(i = 0;cadena[i] != '\0';i++)
 	{
 	   	if (cadena[i] >= 'a' && cadena[i] <= 'z')
-	   	    {
-	   		   	cadena[i] -= 32;
-			}
+	   	{
+	   		cadena[i] -= 32;
+		}
 	}
 }
 
@@ -184,9 +186,9 @@ void Espacios(char * cadena)
     for(i = 0;cadena[i] != '\0';i++)
     {
        	if(cadena[i] != ' ')
-       	  {
-       	    	printf("%c",cadena[i]);
-		  }
+       	{
+       	    printf("%c",cadena[i]);
+		}
 	}
 }
 
