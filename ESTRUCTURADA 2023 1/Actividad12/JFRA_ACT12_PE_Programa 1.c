@@ -253,16 +253,16 @@ void Gen_Txt(Tsalumno v[],int n)
 	
 	archi = fopen(nom_archi,"w");
 	if (archi == NULL)
-       {
-            printf("No se puede abrir el archivo");
-       }
+    {
+        printf("No se puede abrir el archivo");
+    }
 	
 	for(i = 0;i < n;i++)
-	   {
-	   		if (v[i].estado == 'A')
-	   		   {
-	   		   		fprintf(archi,"%8d\t%8ld\t%8s\t%8s\t%8s\t%8d\t%8c\n",i,v[i].matricula,v[i].nombre,v[i].ap_pa,v[i].ap_ma,v[i].edad,v[i].sexo);
-			   }
-	   }
+	{
+	   	if (v[i].estado == 'A')
+	   	{
+	   		fprintf(archi,"%8d\t%8ld\t%8s\t%8s\t%8s\t%8d\t%8c\n",i,v[i].matricula,v[i].nombre,v[i].ap_pa,v[i].ap_ma,v[i].edad,v[i].sexo);
+		}
+	}
 	fclose(archi);
 }

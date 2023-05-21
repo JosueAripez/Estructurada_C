@@ -69,14 +69,14 @@ void menu()
         {
            	case 1:
            	  	printf("\nAgregando....\n");
-				if(i < N-2200)
+				if(i < N-100)
 				{
-					for(j=0;j<2200;j++,i++)
+					for(j=0; j<100; j++, i++)
 					{
 						vect[i] = Gen_Aleatorio();
 					}
 				}
-				printf("2200 registros creados\n");
+				printf("100 registros creados\n");
 				ord = false;
 				system("PAUSE");
             break;
@@ -280,12 +280,12 @@ void Imprim_Reg(Tsalumno v[],int n)
 {
 	int i;
 	system("CLS");
-	printf("%5s\t%10s\t%8s\t%8s\t%8s\t%8s\t%8s\n","No.Registro","Matricula","Nombre","Ap Paterno","Ap Materno","Edad","Sexo");
+	printf("%5s\t%8s\t%10s\t%8s\t%8s\t%8s\t%8s\t%8s\n","No.Registro","Estatus","Matricula","Nombre","Ap Paterno","Ap Materno","Edad","Sexo");
 	for(i=0;i < n;i++)
 	{
 	   	if (v[i].estado == 'A')
 	   	{
-	   		printf("%5d\t%16ld\t%8s\t%8s\t%8s\t%8d\t%8c\n",i,v[i].matricula,v[i].nombre,v[i].ap_pa,v[i].ap_ma,v[i].edad,v[i].sexo);
+	   		printf("%5d\t%8c\t%16ld\t%8s\t%8s\t%8s\t%8d\t%8c\n",i,v[i].estado,v[i].matricula,v[i].nombre,v[i].ap_pa,v[i].ap_ma,v[i].edad,v[i].sexo);
 		}
 	}
 }
