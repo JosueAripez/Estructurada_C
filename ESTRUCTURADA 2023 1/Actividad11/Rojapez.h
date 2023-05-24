@@ -3,6 +3,33 @@
 #include <string.h>
 #include <math.h>
 #include <time.h>
+#include <stdbool.h>
+
+#define TRUE 1
+#define FALSE 0
+
+bool ValidTxt(char *cadena)
+{
+    int i = 0;
+    bool status = false;
+
+	do
+	{
+	   	if (isalpha(cadena[i]) || cadena[i]=='_' || cadena[i]=='-' || isdigit(cadena[i]))
+	   	{
+	   		cadena[i] == cadena [i];
+	   		status = false;
+	   		i++;
+		}
+		else
+		{
+			printf("Los nombres de archivos .txt solamente aceptan caracteres alfanum%cricos y guiones.\n\n",130);
+			status = true;
+		}
+	}while(cadena[i]!='\0' && status == false);
+
+	return status;
+}
 
 int Vali_Num(int ri,int rf,char msge[],char msgeError[])
 {
@@ -26,7 +53,7 @@ int Vali_Num(int ri,int rf,char msge[],char msgeError[])
 	return num;
 }
 
-long Vali_Long(long ri,long rf,char msge[],char msgeError[])
+long Val_Long(long ri,long rf,char msge[],char msgeError[])
 {
 	long num;
 	char xnum[30];
@@ -48,7 +75,7 @@ long Vali_Long(long ri,long rf,char msge[],char msgeError[])
 	return num;
 }
 
-void Vali_Cadena(char * cadena,char msge[])
+void Val_Cadena(char * cadena,char msge[])
 {
 	int i=0;
 	char ola;
@@ -58,7 +85,7 @@ void Vali_Cadena(char * cadena,char msge[])
 		ola = getc(stdin);
 		if((ola>='a' && ola<='z') || (ola>='A' && ola<='Z' || ola == ' '))
 		{
-		  	if (cadena[i-1] == ' ' && ola == ' ')
+			if (cadena[i-1] == ' ' && ola == ' ')
 		  	{
 			}
 			else
@@ -69,11 +96,11 @@ void Vali_Cadena(char * cadena,char msge[])
 				else
 				{
 					cadena[i] = ola;
-		  		    i++;
+		  			i++;
 				}
 			}
 		}
-	} while (ola!='\n');
+	}while (ola!='\n');
 	
 	if (cadena[i-1] == ' ')
 	{
@@ -134,7 +161,20 @@ void OrdVec(int vect[],int tam)
 	}
 }
 
-void Vali_Espacios(char * cadena)
+void Mayus(char * cadena)
+{
+	int i;
+	
+	for(i = 0;cadena[i] != '\0';i++)
+	{
+	   	if (cadena[i] >= 'a' && cadena[i] <= 'z')
+	   	{
+	   		cadena[i] -= 32;
+		}
+	}
+}
+
+void Espacios(char * cadena)
 {
 	int i;
 
@@ -145,4 +185,17 @@ void Vali_Espacios(char * cadena)
        	    printf("%c",cadena[i]);
 		}
 	}
+}
+
+int check (int n, int vect[], int tama)
+{
+	int i;
+	for (i=0; i<=tama; i++)
+	{
+		if (n==vect[i])
+		{
+			return 1;
+		}
+	}
+	return 0;
 }
