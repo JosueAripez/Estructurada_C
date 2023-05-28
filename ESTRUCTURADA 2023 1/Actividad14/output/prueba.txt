@@ -1,0 +1,10 @@
+       0	  337353	Fernanda	   Rojas	Bustamante	      22	       M
+       1	  339915	  Estela	   Leyva	Escamilla	      18	       M
+       2	  358509	   Josue	  Wilson	   Leyva	      24	       H
+       3	  333247	 Abraham	    Grey	Beristain	      21	       H
+       4	  357758	   Josue	  Robins	 Rojapez	      25	       H
+       5	  331450	    Jose	 Rojapez	Trujillo	      18	       H
+       6	  340451	  Estela	  Aripez	Shepherd	      21	       M
+       7	  360051	  Estela	Beristain	   Leyva	      23	       M
+       8	  347312	Fernanda	 Rojapez	   Leyva	      20	       M
+       9	  343857	  Estela	   Rojas	Escamilla	      22	       M

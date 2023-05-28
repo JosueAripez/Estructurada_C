@@ -332,7 +332,7 @@ void Ver_Txt(Tsalumno v[],int n)
 	char caracter;
 	bool stat = false;
 	
-	archi = fopen("datos.txt","r");
+	archi = fopen("datos.txt","r+b");
 	
 	if(archi)
 	{
