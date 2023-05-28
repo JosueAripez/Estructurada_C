@@ -1,5 +1,10 @@
 #include "Rojapez.h"
-#define N 2500
+#define N 5000
+
+typedef struct _index{
+	int index;
+	long matricula;
+}Tindex;
 
 typedef struct _alumno{
 	
@@ -10,22 +15,21 @@ typedef struct _alumno{
 	char ap_ma[30];
 	int edad;
 	char sexo;
-
 } Tsalumno;
 
 int msges();
 void menu();
 
+Tsalumno Gen_Manual();
 Tsalumno Gen_Aleatorio();
-
-void Imprim_Reg(Tsalumno v[],int n);
-void Ord_Reg(Tsalumno v[],int n,bool orden);
+void Ord_Reg(Tindex ind[],int n,bool orden);
 void Busc_Reg(Tsalumno v[],int n,bool orden);
 void Gen_Txt(Tsalumno v[],int n);
-void Ver_Txt(Tsalumno v[],int n);
-void Gen_Bin(Tsalumno v[],int n);
-void Cargar_Bin(Tsalumno v[],int n);
+int Cargar_Bin(Tindex ind[], int n);
 void Elim_Reg(Tsalumno v[],int n);
+void Imprimir_Bin(Tsalumno v[],int n);
+Tsalumno Bin_Ord(int pos);
+void Empaquetar_Archi();
 
 int main()
 {
@@ -40,104 +44,151 @@ int msges()
 	system("CLS");
 	printf ("-----------------MENU-----------------\n");
     printf("1.- Agregar\n");
-    printf("2.- Editar Registro\n");
-    printf("3.- Eliminar Registro\n");
-    printf("4.- Buscar\n");
-    printf("5.- Ordenar\n");
-    printf("6.- Imprimir\n");
+    printf("2.- Eliminar\n");
+    printf("3.- Buscar\n");
+    printf("4.- Ordenar\n");
+    printf("5.- Imprimir Resgistros Archivo Original\n");
+	printf("6.- Imprimir Resgistros Archivo Ordenado\n");
     printf("7.- Generar Archivo de Texto\n");
-    printf("8.- Ver Archivo de Texto\n");
-    printf("9.- Crear Archivo Binario\n");
-    printf("10.- Cargar Archivo Binario\n");
+    printf("8.- Empaquetar \n");
     printf("0.- Salir\n\n");
-    op = Val_Int(0,10,"Ingresa una opcion","Esa opcion no es valida");
+    op = Val_Int(0,8,"Ingresa una opcion","Esa opcion no es valida");
     return op;
 }
 
 void menu()
 {
 	bool ord = false;
-	bool arch_carg = false;
-	int op;
-	int i = 0,j,num;
+	int op,op_2;
+	int i = 0,j,num,cont = 2500,aux;
 	Tsalumno vect[N],reg;
+	Tindex ind[N];
     do
 	{
-     	
-        op = msges();
+     	op = msges();
         switch (op)
         {
            	case 1:
-           	  	printf("\nAgregando....\n");
-				if(i < N-100)
+           	  	system("CLS");
+           	  	printf("1.- Agregar Aleatorio \n");
+                printf("2.- Agregar Manual \n");
+                op_2 = Val_Int(0,2,"Ingresa una opcion","Esa opcion no es valida");
+				if(op_2 == 1)
 				{
-					for(j=0; j<100; j++, i++)
+					if(i < N-1)
 					{
-						vect[i] = Gen_Aleatorio();
+					    for(j=0;j<1;j++,i++)
+						{
+						   	vect[i] = Gen_Aleatorio();
+						   	ind[N].index = cont;
+						   	ind[N].matricula = vect[N].matricula;
+						   	cont = cont  + 1;
+						}
+					}
+						   
+				}
+				if(op_2 == 2)
+				{
+					if(i < N-1)
+					{
+					    for(j=0;j<1;j++,i++)
+						{
+						   	vect[i] = Gen_Manual();
+						   	ind[N].index = cont;
+						   	ind[N].matricula = vect[N].matricula;
+						   	cont = cont  + 1;
+						}
 					}
 				}
-				printf("100 registros creados\n");
+				printf("Registro creado\n",164);
 				ord = false;
 				system("PAUSE");
             break;
               
             case 2:
-              	printf("\nEditando....\n");
-				
-				system("PAUSE");
-            break;
-              
-            case 3:
-              	printf("\nEliminando....\n");
+                printf("\n-------Eliminar------\n");
               	Elim_Reg(vect,i);
               	system("PAUSE");
             break;
               
-            case 4:
-              	printf("\nBuscando....\n");
+            case 3:
+              	printf("\n-------Buscar------\n");
               	Busc_Reg(vect,i,ord);
               	system("PAUSE");
             break;
               
-            case 5:
-              	printf("\nOrdenando....\n");
-              	Ord_Reg(vect,i,ord);
+            case 4:
+            	printf("\n-------Ordenar------\n");
+              	Ord_Reg(ind,cont,ord);
               	ord = true;
               	system("PAUSE");
             break;
               
-            case 6:
-              	printf("\nImprimiendo....\n");
-              	Imprim_Reg(vect,i);
+            case 5:
+              	printf("\n-------Imprimir-------\n");
+              	system("CLS");
+           	  	printf("1.- Imprimir Ordenado \n");
+                printf("2.- Imprimir Normal \n");
+                op_2 = Val_Int(0,2,"Ingresa una opcion","Esa opcion no es valida");
+				if(op_2 == 1)
+				{
+					for(i=0; i<cont; i++)
+				   	{
+				   	    aux = ind[i].index;
+				   	    vect[i] = Bin_Ord(aux);
+				   	     printf("%5d\t%16ld\t%8s\t%8s\t%8s\t%8d\t%8c\n",i,vect[i].matricula,vect[i].nombre,vect[i].ap_pa,vect[i].ap_ma,vect[i].edad,vect[i].sexo);
+	
+					}
+						   
+				}
+				if(op_2 == 2)
+				{
+					Imprimir_Bin(vect,i);
+				}
               	system("PAUSE");
             break;
               
-            case 7:
-              	printf("\nGenerando Archivo de Texto....\n");
+            case 6:
+              	printf("\n-------Generar Archivo de Texto-------\n");
               	Gen_Txt(vect,i);
               	system("PAUSE");
             break;
               
-            case 8:
-              	printf("\nAbriendo Archivo de Texto....\n");
-              	Ver_Txt(vect,i);
+            case 7:
+              	printf("\n--------Empaquetar-------\n");
+              	Empaquetar_Archi();
               	system("PAUSE");
             break;
-              
-            case 9:
-              	printf("\nCreando Archivo Binario....\n");
-              	Gen_Bin(vect,i);
-              	system("PAUSE");
-            break;
-
-            case 10:
-              	printf("\nCargando Archivo Binario....\n");
-              	Cargar_Bin(vect,i);
-              	system("PAUSE");
-            break;
-		}
+        }
 
     }while (op != 0);
+}
+
+int Cargar_Bin(Tindex ind[], int n)
+{
+	FILE *fa;
+	Tsalumno reg;
+	int i=0;
+	fa = fopen("registros.dat", "r+b");
+	if(fa)
+	{
+	  	for(i=0; i<n;i++)
+	  	{
+			 
+			fread(&reg, sizeof(struct _alumno),1,fa);
+			ind[i].index = i;
+			ind[i].matricula = reg.matricula;
+		}
+		for(i=0; i<n; i++)
+		{
+		   	printf("%d %ld %c \n ",ind[i].index,ind[i].matricula);
+		}
+	}
+	else
+	{
+	  	printf("El archivo no existe");
+	}	
+	fclose(fa);
 }
 
 Tsalumno Gen_Aleatorio()
@@ -162,12 +213,61 @@ Tsalumno Gen_Aleatorio()
 	  	strcpy(reg.nombre,Nom_Homb[rand()%15]);
 	  	reg.sexo = 'H';
 	} 
-	
 	strcpy(reg.ap_pa,Apell[rand()%15]);
 	strcpy(reg.ap_ma,Apell[rand()%15]);
 	reg.matricula = rand()%70000 + 330000;
 	reg.estado = 'A';
 	reg.edad = rand()%8 + 18;
+	
+	FILE *fa;
+	fa = fopen("registros.dat","a+b");
+	{
+		fwrite(&reg,sizeof(struct _alumno), 1, fa);
+	}
+	fclose(fa);
+	return reg;
+}
+
+Tsalumno Gen_Manual()
+{
+	Tsalumno reg;
+	int sex,edad;
+	long matricula;
+	char Nombre[20], Ap_Pat[20], Ap_Ma[20],sexo;
+	system("CLS");
+	fflush(stdin);
+	Val_Cadena(reg.nombre,"Dame tu nombre: ");
+	fflush(stdin);
+	Val_Cadena(reg.ap_pa,"Dame tu apellido paterno: ");
+	fflush(stdin);
+	Val_Cadena(reg.ap_ma,"Dame tu apellido materno: ");
+	reg.estado = 'A';
+	reg.matricula = Val_Long(0, 100000000, "Dame tu matricula: ", "Esa matricula no es valida");
+	reg.edad = Val_Int(0,100,"Dame tu edad: ","Esa edad no es valida");
+	sex = Val_Int(0,1,"Dame tu sexo (0.- Mujer, 1.- Hombre): ","Esa no es una opcion");
+	
+	if (sex == 0)
+	{
+		reg.sexo = 'M';
+	}
+	else
+	{
+		if (sex == 1)
+		{
+			reg.sexo = 'H';
+		}
+		else
+		{
+			printf("Esa no es opcion.\n");
+		}
+	}
+	
+	FILE *fa;
+	fa = fopen("registros.dat","a+b");
+	{
+		fwrite(&reg,sizeof(struct _alumno), 1, fa);
+	}
+	fclose(fa);
 	return reg;
 }
 
@@ -185,7 +285,7 @@ void Elim_Reg(Tsalumno v[],int n)
 	}
 	if(i == n)
 	{
-		printf("Matricula no Existente\n");
+		printf("Esa matricula no se encuentra en el sistema.\n");
 	}
 	else
 	{
@@ -198,97 +298,100 @@ void Elim_Reg(Tsalumno v[],int n)
 void Busc_Reg(Tsalumno v[],int n,bool orden)
 {
     bool encon;
-	int i,band,sup,inf,med;
+	int i;
 	long matricula;
 	
 	system("CLS");
-	band = TRUE;
 	matricula = Val_Long(300000,100000000,"¿Que matricula buscas? ","Ese numero no es valido");
 	
 	for(i=0;(i<n)&&(encon == false);i++)
 	{
 		if(matricula == v[i].matricula)
 		{
+			printf("\n------Registro Encontrado------\n");
 			printf("%5s\t%8s\t%8s\t%8s\t%8s\t%8s\t%8s\n","No.Registro","Matricula","Nombre","Ap Paterno","Ap Materno","Edad","Sexo");
 			printf("%5d\t%16ld\t%8s\t%8s\t%8s\t%8d\t%8c\n",i,v[i].matricula,v[i].nombre,v[i].ap_pa,v[i].ap_ma,v[i].edad,v[i].sexo);
 			printf("\n");
 			encon = true;
 		}
-	}
+	}				
 	if(encon == false)
 	{
-		printf("Matricula no Existente\n");
+		printf("Esa matricula no se encuentra en el sistema\n");
 	}	
 }
 
-void Ord_Reg(Tsalumno v[],int n,bool orden)
+void Ord_Reg(Tindex ind[],int n,bool orden)
 {
-	int i,j,k;
+	int i,j;
 	long temp = 0;
-	Tsalumno tempo;
+	Tindex tempo;
     
     if(orden == false)
     {
-    	if(N <= 500)
-	    {
-		    for (i = n/2; i > 0; i = i / 2)
-    		{
-       			for (j = i; j < n; j++)
-        		{
-            		for(k = j - i; k >= 0; k = k - i)
-            		{
-                		if (v[k+i].matricula >= v[k].matricula)
-                		{
-                			break;
-						}
-                		else
-                		{
-                   			tempo = v[k];
-                			v[k] = v[k+i];
-                   			v[k+i] = tempo;
-                		}
-            		}
-        		}
-    		}
-	    }
-	    else
-	    {
-		    if(N > 500)
-		    {
-			    for (i = 0; i <= n; i++)
-                {
-    	            for (j = 0; j <= n - i; j++)
-	                {
-			            if (v[j].matricula < v[j + 1].matricula)
-			            {
-				            tempo = v[j];
-				            v[j] = v[j + 1];
-				            v[j + 1] = tempo;	
-			            }  	
-		            } 	
-	            }
-		    }
+		for (i = 0; i < n; i++)
+        {
+    	    for (j = 0; j < n - i; j++)
+	        {
+			    if (ind[j].matricula < ind[j + 1].matricula)
+			    {
+				    tempo = ind[j];
+				    ind[j] = ind[j + 1];
+				    ind[j + 1] = tempo;	
+			    }  	
+		    } 	
 	    }
 	}
 	else
     {
-  	   printf("Vector Ordenado\n");
+  	    printf("No es necesario ordenarlo, ya lo esta\n\n");
     }
 }
 
-void Imprim_Reg(Tsalumno v[],int n)
+Tsalumno Bin_Ord(int pos)
+{
+	FILE* fa;
+	Tsalumno reg;
+	fa = fopen("registros.dat","r+b");
+	if (fa)
+	   {
+		    fseek(fa, pos*(sizeof(struct _alumno)), SEEK_SET);   
+	        fread(&reg, sizeof(struct _alumno),1,fa);           
+	        fclose(fa);                                        
+	        return reg;
+	    }        
+	    else
+	    {
+		    printf("El archivo no existe");
+	    }             
+}
+
+void Imprimir_Bin(Tsalumno v[],int n)
 {
 	int i;
+	i = n;
+	FILE* archi;
+	Tsalumno reg;
 	system("CLS");
-	printf("%5s\t%8s\t%10s\t%8s\t%8s\t%8s\t%8s\t%8s\n","No.Registro","Estatus","Matricula","Nombre","Ap Paterno","Ap Materno","Edad","Sexo");
-	for(i=0;i < n;i++)
+	archi = fopen("registros.dat","r+b");
+	
+	if (archi)
 	{
-	   	if (v[i].estado == 'A')
+	   	while (fread(&reg,sizeof(struct _alumno), 1, archi))
 	   	{
-	   		printf("%5d\t%8c\t%16ld\t%8s\t%8s\t%8s\t%8d\t%8c\n",i,v[i].estado,v[i].matricula,v[i].nombre,v[i].ap_pa,v[i].ap_ma,v[i].edad,v[i].sexo);
+	   	    printf("%c %ld %s %s %s %d %c\n", reg.estado, reg.matricula, reg.nombre, reg.ap_pa, reg.ap_ma, reg.edad, reg.sexo);
+	   	    v[i] = reg;
+	   	    i++;
 		}
+		close(archi);
+		printf("\n");
+	}
+	else
+	{
+	    printf("\nEl archivo no existe\n ");
 	}
 }
+
 
 void Gen_Txt(Tsalumno v[],int n)
 {
@@ -300,7 +403,8 @@ void Gen_Txt(Tsalumno v[],int n)
 	
 	do
 	{
-		printf("Ingresa el nombre de su archivo: ");
+	
+		printf("Ingrese el nombre de su archivo: ");
 		fflush(stdin);
 		gets(nom_archi);
 		stat = ValidTxt(nom_archi);
@@ -310,102 +414,48 @@ void Gen_Txt(Tsalumno v[],int n)
 	strcat(nom_archi,".txt\0");
 	printf("\nEl nuevo nombre del archivo es: %s\n",nom_archi);
 	
-	archi = fopen(nom_archi,"w");
+	archi = fopen(nom_archi,"w+");
 	if (archi == NULL)
     {
         printf("No se puede abrir el archivo");
     }
+	
+	fprintf("%5s\t%8s\t%8s\t%8s\t%8s\t%8s\t%8s\n","No.Registro","Matricula","Nombre","Ap Paterno","Ap Materno","Edad","Sexo");
+	
 	for(i = 0;i < n;i++)
 	{
-	   	if (v[i].estado == 'A')
-	   	{
-	   		fprintf(archi,"%8d\t%8ld\t%8s\t%8s\t%8s\t%8d\t%8c\n",i,v[i].matricula,v[i].nombre,v[i].ap_pa,v[i].ap_ma,v[i].edad,v[i].sexo);
-		}
+	   	fprintf(archi,"%8d\t%8ld\t%8s\t%8s\t%8s\t%8d\t%8c\n",i,v[i].matricula,v[i].nombre,v[i].ap_pa,v[i].ap_ma,v[i].edad,v[i].sexo);
 	}
 	fclose(archi);
 }
 
-void Ver_Txt(Tsalumno v[],int n)
+void Empaquetar_Archi()
 {
-	system("CLS");
-	FILE *archi;
-	char caracter;
-	bool stat = false;
-	
-	archi = fopen("datos.txt","r");
-	
-	if(archi)
-	{
-		while(!feof(archi))
-		{
-		    caracter = fgetc(archi);
-		    fprintf(stdout,"%c",caracter);
+	FILE *bin;
+    FILE *ftemp;
+ 
+    Tsalumno reg;
+ 
+    ftemp = fopen("temp.dat", "w+b");
+    bin = fopen("registros.dat", "r+b");
+    if (bin)
+    {
+    	while(fread(&reg, sizeof (struct _alumno),1,bin))
+    	{
+    	    if (reg.estado == 'A')
+    	    {
+    	     	fwrite(&reg, sizeof(struct _alumno),1,ftemp);
+			}
 		}
-		fclose(archi);
+     	system("PAUSE");
+	    fclose(bin);
+	    fclose(ftemp);
+	    system("del temp.bak");
+	    system("rename registros.dat temp.bak");
+	    system("rename temp.dat registros.dat");		 
 	}
-	else
-	{
-	  	printf("El archivo no existe\n\n");
-	}
-}
-
-void Gen_Bin(Tsalumno v[],int n)
-{
-	int i;
-	char nom_archi[24];
-	bool stat = false;
-	FILE * archi;
-	Tsalumno reg;
-	system("CLS");
-	
-	do
-	{
-	
-		printf("Ingresa el nombre de su archivo: ");
-		fflush(stdin);
-		gets(nom_archi);
-		stat = ValidTxt(nom_archi);
-		
-	}while (stat == true);
-	
-	strcat(nom_archi,".dat\0");
-	printf("\nEl nuevo nombre del archivo es: %s\n",nom_archi);
-	
-	archi = fopen(nom_archi,"w+b");
-	printf("\n\n");
-	printf("     ----> %d",n);
-	for (i=0; i<n; i++)
-	{
-	    reg = v[i];
-	    printf("%c %ld %s %s %s %d %c", reg.estado, reg.matricula, reg.nombre, reg.ap_pa, reg.ap_ma, reg.edad, reg.sexo);
-	    fwrite(&reg,sizeof(struct _alumno), 1, archi);
-	}
-	printf("\n\n");
-	fclose(archi);
-}
-
-void Cargar_Bin(Tsalumno v[],int n)
-{
-	int i;
-	i = n;
-	FILE* archi;
-	Tsalumno reg;
-	system("CLS");
-	archi = fopen("datos_bin.dat","r+b");
-	
-	if (archi)
-	{
-	   	while (fread(&reg,sizeof(struct _alumno), 1, archi))
-	   	{
-	   	    printf("%c %ld %s %s %s %d %c\n", reg.estado, reg.matricula, reg.nombre, reg.ap_pa, reg.ap_ma, reg.edad, reg.sexo);
-	   	    v[i] = reg;
-	   	    i++;
-		}
-		fclose(archi);
-		printf("\n");
-	}
-	else
-	{
-	    printf("\nEl archivo no existe\n ");
+    else
+    {
+    	printf("No existe el archivo");
 	}
 }
