@@ -72,7 +72,7 @@ void menu()
            	case 1:
            	  	system("CLS");
            	  	printf("| 1.- Aleatorio | 2.- Manual |\n");
-                op_2 = Val_Int(0,2,"Ingresa una opcion","Esa opcion no es valida");
+                op_2 = Val_Int(0,2,"Ingresa una opcion","Opcion no valida");
 				if(op_2 == 1)
 				{
 					if(i < N-10)
@@ -100,65 +100,60 @@ void menu()
 						}
 					}
 				}
-				printf("Registro creado\n",164);
+				printf("Registro Generado Correctamente\n",164);
 				ord = false;
 				system("PAUSE");
             break;
               
             case 2:
-                printf("\n-------Eliminar------\n");
+                printf("\nEliminando....\n");
               	Elim_Reg(vect,i);
               	system("PAUSE");
             break;
               
             case 3:
-              	printf("\n-------Buscar------\n");
+              	printf("\nBuscando....\n");
               	Busc_Reg(vect,i,ord);
               	system("PAUSE");
             break;
               
             case 4:
-            	printf("\n-------Ordenar------\n");
+            	printf("\nOrdenando....\n");
               	Ord_Reg(ind,cont,ord);
               	ord = true;
               	system("PAUSE");
             break;
               
             case 5:
-              	printf("\n-------Imprimir-------\n");
+              	printf("\nImprimiendo....\n");
               	system("CLS");
-           	  	printf("1.- Imprimir Ordenado \n");
-                printf("2.- Imprimir Normal \n");
-                op_2 = Val_Int(0,2,"Ingresa una opcion","Esa opcion no es valida");
-				if(op_2 == 1)
-				{
-					for(i=0; i<cont; i++)
-				   	{
-				   	    aux = ind[i].index;
-				   	    vect[i] = Bin_Ord(aux);
-				   	     printf("%5d\t%16ld\t%8s\t%8s\t%8s\t%8d\t%8c\n",i,vect[i].matricula,vect[i].nombre,vect[i].ap_pa,vect[i].ap_ma,vect[i].edad,vect[i].sexo);
-	
-					}
-						   
-				}
-				if(op_2 == 2)
-				{
-					Imprimir_Bin(vect,i);
-				}
+				Imprimir_Bin(vect,i);
               	system("PAUSE");
             break;
               
             case 6:
-              	printf("\n-------Generar Archivo de Texto-------\n");
-              	Gen_Txt(vect,i);
+              	printf("\nImprimiendo....\n");
+              	for(i=0; i<cont; i++)
+				{
+				   	aux = ind[i].index;
+				   	vect[i] = Bin_Ord(aux);
+				   	printf("%5d\t%16ld\t%8s\t%8s\t%8s\t%8d\t%8c\n",i,vect[i].matricula,vect[i].nombre,vect[i].ap_pa,vect[i].ap_ma,vect[i].edad,vect[i].sexo);
+	
+				}
               	system("PAUSE");
             break;
               
             case 7:
-              	printf("\n--------Empaquetar-------\n");
-              	Empaquetar_Archi();
+              	printf("\nGenerando Archivo de Texto....\n");
+              	Gen_Txt(vect,i);
               	system("PAUSE");
             break;
+
+			case 8:
+				printf("\nEmpaqutando....\n");
+              	Empaquetar_Archi();
+              	system("PAUSE");
+			break;
         }
 
     }while (op != 0);
@@ -236,15 +231,15 @@ Tsalumno Gen_Manual()
 	char Nombre[20], Ap_Pat[20], Ap_Ma[20],sexo;
 	system("CLS");
 	fflush(stdin);
-	Val_Cadena(reg.nombre,"Dame tu nombre: ");
+	Val_Cadena(reg.nombre,"Nombres (s): ");
 	fflush(stdin);
-	Val_Cadena(reg.ap_pa,"Dame tu apellido paterno: ");
+	Val_Cadena(reg.ap_pa,"Apellido Paterno: ");
 	fflush(stdin);
-	Val_Cadena(reg.ap_ma,"Dame tu apellido materno: ");
+	Val_Cadena(reg.ap_ma,"Apellido Materno: ");
 	reg.estado = 'A';
-	reg.matricula = Val_Long(0, 100000000, "Dame tu matricula: ", "Esa matricula no es valida");
-	reg.edad = Val_Int(0,100,"Dame tu edad: ","Esa edad no es valida");
-	sex = Val_Int(0,1,"Dame tu sexo (0.- Mujer, 1.- Hombre): ","Esa no es una opcion");
+	reg.matricula = Val_Long(0, 100000000, "Matricula: ", "Matricula inexsistente");
+	reg.edad = Val_Int(0,100,"Edad: ","Edad invalida");
+	sex = Val_Int(0,1,"Sexo: | 0.- Mujer | 1.- Hombre | ","Opcion no valida");
 	
 	if (sex == 0)
 	{
@@ -278,14 +273,14 @@ void Elim_Reg(Tsalumno v[],int n)
 	bool encon;
 	
 	system("CLS");
-	matricula = Val_Long(300000,100000000,"¿Que matricula buscas? ","Ese numero no es valido");
+	matricula = Val_Long(300000,100000000,"¿Que matricula buscas? ","Numero no valido");
 	
 	for(i=0;(i<n )&&(v[i].matricula != matricula);i++)
 	{
 	}
 	if(i == n)
 	{
-		printf("Esa matricula no se encuentra en el sistema.\n");
+		printf("Matricula inexsistente\n");
 	}
 	else
 	{
@@ -302,13 +297,13 @@ void Busc_Reg(Tsalumno v[],int n,bool orden)
 	long matricula;
 	
 	system("CLS");
-	matricula = Val_Long(300000,100000000,"¿Que matricula buscas? ","Ese numero no es valido");
+	matricula = Val_Long(300000,100000000,"¿Que matricula buscas? ","Numero no valido");
 	
 	for(i=0;(i<n)&&(encon == false);i++)
 	{
 		if(matricula == v[i].matricula)
 		{
-			printf("\n------Registro Encontrado------\n");
+			printf("\nRegistro:\n");
 			printf("%5s\t%8s\t%8s\t%8s\t%8s\t%8s\t%8s\n","No.Registro","Matricula","Nombre","Ap Paterno","Ap Materno","Edad","Sexo");
 			printf("%5d\t%16ld\t%8s\t%8s\t%8s\t%8d\t%8c\n",i,v[i].matricula,v[i].nombre,v[i].ap_pa,v[i].ap_ma,v[i].edad,v[i].sexo);
 			printf("\n");
@@ -317,7 +312,7 @@ void Busc_Reg(Tsalumno v[],int n,bool orden)
 	}				
 	if(encon == false)
 	{
-		printf("Esa matricula no se encuentra en el sistema\n");
+		printf("EMatriclua inexsistente\n");
 	}	
 }
 
@@ -344,7 +339,7 @@ void Ord_Reg(Tindex ind[],int n,bool orden)
 	}
 	else
     {
-  	    printf("No es necesario ordenarlo, ya lo esta\n\n");
+  	    printf("Ordenado\n");
     }
 }
 
