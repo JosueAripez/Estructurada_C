@@ -22,6 +22,7 @@ void menu();
 
 Tsalumno Gen_Manual();
 Tsalumno Gen_Aleatorio();
+
 void Ord_Reg(Tindex ind[],int n,bool orden);
 void Busc_Reg(Tsalumno v[],int n,bool orden);
 void Gen_Txt(Tsalumno v[],int n);
@@ -52,7 +53,7 @@ int msges()
     printf("7.- Generar Archivo de Texto\n");
     printf("8.- Empaquetar \n");
     printf("0.- Salir\n\n");
-    op = Val_Int(0,8,"Ingresa una opcion","Esa opcion no es valida");
+    op = Val_Int(0,8,"Ingresa una opcion","Opcion no valida");
     return op;
 }
 
@@ -70,14 +71,13 @@ void menu()
         {
            	case 1:
            	  	system("CLS");
-           	  	printf("1.- Agregar Aleatorio \n");
-                printf("2.- Agregar Manual \n");
+           	  	printf("| 1.- Aleatorio | 2.- Manual |\n");
                 op_2 = Val_Int(0,2,"Ingresa una opcion","Esa opcion no es valida");
 				if(op_2 == 1)
 				{
-					if(i < N-1)
+					if(i < N-10)
 					{
-					    for(j=0;j<1;j++,i++)
+					    for(j=0; j<10; j++, i++)
 						{
 						   	vect[i] = Gen_Aleatorio();
 						   	ind[N].index = cont;
