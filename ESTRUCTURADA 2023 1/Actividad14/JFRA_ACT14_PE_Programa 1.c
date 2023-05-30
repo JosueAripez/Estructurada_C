@@ -235,12 +235,17 @@ Tsalumno Gen_Manual()
 	fflush(stdin);
 	Val_Cadena(reg.nombre,"Nombres (s): ");
 	fflush(stdin);
+	system("CLS");
 	Val_Cadena(reg.ap_pa,"Apellido Paterno: ");
 	fflush(stdin);
+	system("CLS");
 	Val_Cadena(reg.ap_ma,"Apellido Materno: ");
+	system("CLS");
 	reg.estado = 'A';
 	reg.matricula = Val_Long(0, 100000000, "Matricula: ", "Matricula inexsistente");
+	system("CLS");
 	reg.edad = Val_Int(0,100,"Edad: ","Edad invalida");
+	system("CLS");
 	sex = Val_Int(0,1,"Sexo: | 0.- Mujer | 1.- Hombre | ","Opcion no valida");
 	
 	if (sex == 0)
