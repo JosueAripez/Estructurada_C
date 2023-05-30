@@ -1,5 +1,5 @@
 #include "Rojapez.h"
-#define N 3500
+#define N 5000
 
 typedef struct _index{
 	int index;
@@ -75,9 +75,9 @@ void menu()
                 op_2 = Val_Int(0,2,"Ingresa una opcion","Opcion no valida");
 				if(op_2 == 1)
 				{
-					if(i < N-10)
+					if(i < N-1)
 					{
-					    for(j=0; j<10; j++, i++)
+					    for(j=0; j<1; j++, i++)
 						{
 						   	vect[i] = Gen_Aleatorio();
 						   	ind[N].index = cont;
@@ -181,14 +181,14 @@ int Cargar_Bin(Tindex ind[], int n)
 	}
 	else
 	{
-	  	printf("El archivo no existe");
+		printf("El archivo no existe");
 	}	
 	fclose(fa);
 }
 
 Tsalumno Gen_Aleatorio()
 {
-Tsalumno reg;
+	Tsalumno reg;
 	int sex;
 	char nombre[15][20];
 	char Nom_Muj[20][15] = {"Blanca","Estela","Brisa","Fernanda","Yuniva","Dayany","Dayana","Jessica","America","Alexia","Julia","Ashley","Alexa","Maria","Keyla"};
@@ -208,13 +208,11 @@ Tsalumno reg;
 	  	strcpy(reg.nombre,Nom_Homb[rand()%15]);
 	  	reg.sexo = 'H';
 	} 
-	
 	strcpy(reg.ap_pa,Apell[rand()%15]);
 	strcpy(reg.ap_ma,Apell[rand()%15]);
 	reg.matricula = rand()%70000 + 330000;
 	reg.estado = 'A';
 	reg.edad = rand()%8 + 18;
-	return reg;
 	
 	FILE *fa;
 	fa = fopen("registros.dat","a+b");
@@ -260,7 +258,7 @@ Tsalumno Gen_Manual()
 		}
 		else
 		{
-			printf("Esa no es opcion.\n");
+			printf("Opcion invalida\n");
 		}
 	}
 	
@@ -310,7 +308,6 @@ void Busc_Reg(Tsalumno v[],int n,bool orden)
 	{
 		if(matricula == v[i].matricula)
 		{
-			printf("\nRegistro:\n");
 			printf("%5s\t%8s\t%8s\t%8s\t%8s\t%8s\t%8s\n","No.Registro","Matricula","Nombre","Ap Paterno","Ap Materno","Edad","Sexo");
 			printf("%5d\t%16ld\t%8s\t%8s\t%8s\t%8d\t%8c\n",i,v[i].matricula,v[i].nombre,v[i].ap_pa,v[i].ap_ma,v[i].edad,v[i].sexo);
 			printf("\n");
@@ -319,7 +316,7 @@ void Busc_Reg(Tsalumno v[],int n,bool orden)
 	}				
 	if(encon == false)
 	{
-		printf("EMatriclua inexsistente\n");
+		printf("Matricula inexsistente\n");
 	}	
 }
 
@@ -346,7 +343,7 @@ void Ord_Reg(Tindex ind[],int n,bool orden)
 	}
 	else
     {
-  	    printf(" Vector ya Ordenado\n");
+  	    printf("Vector ya ordenado\n");
     }
 }
 
@@ -378,15 +375,15 @@ void Imprimir_Bin(Tsalumno v[],int n)
 	archi = fopen("registros.dat","r+b");
 	
 	if (archi)
-	{
+	{		
 		printf("%5s\t%8s\t%10s\t%8s\t%8s\t%8s\t%8s\t%8s\n","No.Registro","Estatus","Matricula","Nombre","Ap Paterno","Ap Materno","Edad","Sexo");
 	   	while (fread(&reg,sizeof(struct _alumno), 1, archi))
 	   	{
-			printf("%5d\t%8c\t%16ld\t%8s\t%8s\t%8s\t%8d\t%8c\n",i,v[i].estado,v[i].matricula,v[i].nombre,v[i].ap_pa,v[i].ap_ma,v[i].edad,v[i].sexo);
+	   	    printf("%5d\t%8c\t%16ld\t%8s\t%8s\t%8s\t%8d\t%8c\n",i,v[i].estado,v[i].matricula,v[i].nombre,v[i].ap_pa,v[i].ap_ma,v[i].edad,v[i].sexo);
 	   	    v[i] = reg;
 	   	    i++;
 		}
-		close(archi);
+		fclose(archi);
 		printf("\n");
 	}
 	else
