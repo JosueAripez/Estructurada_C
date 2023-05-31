@@ -98,18 +98,15 @@ Tdato add_manual(Tdato reg, int j)
 int buscar(Tdato vec[], int tam, int id)
 {
 	int i, j;
+	printf("%5s\t%8s\t%8s\t%8s\t%8s\t%8s\t%8s\n","No.Registro","Matricula","Nombre","Ap Paterno","Ap Materno","Edad","Sexo");
 	
 	for(i = 0; i < tam; i++)
 	{
 		if(vec[i].matriz == id)
 		{
 			system("CLS");
-			printf("Matricula: %d\n", vec[i].matriz);
-			printf("Nombre: %s\n", vec[i].nombre);
-			printf("Apellido paterno: %s\n", vec[i].appaterno);
-			printf("Apellido materno: %s\n", vec[i].apmaterno);
-			printf("Edad: %d\n", vec[i].edad);
-			printf("Sexo: %c\n", vec[i].sexo);
+
+			printf("%5d\t%8s\t%8s\t%8s\t%8d\t%8c\n",vec[i].matriz,vec[i].nombre,vec[i].appaterno,vec[i].apmaterno,vec[i].edad,vec[i].sexo);
 			system("pause");
 			return i;
 		}
@@ -157,18 +154,15 @@ void eliminar(Tdato vec[], int tam, int id, Tdato reg)
 void impreg(Tdato vect[], int tam)
 {
 	int i=0;
+	printf("%5s\t%8s\t%8s\t%8s\t%8s\t%8s\t%8s\n","No.Registro","Matricula","Nombre","Ap Paterno","Ap Materno","Edad","Sexo");
 	
 	for(i = 0; i < tam; i++)
 	{
 		if(vect[i].status == 1)
 		{
-			printf("Status: %d\n", vect[i].status);
-			printf("Matricula: %d\n", vect[i].matriz);
-			printf("Nombre: %s\n", vect[i].nombre);
-			printf("Apellido Paterno: %s\n", vect[i].appaterno);
-			printf("Apellido Materno: %s\n", vect[i].apmaterno);
-			printf("Edad: %d\n", vect[i].edad);
-			printf("Sexo: %c\n\n\n", vect[i].sexo);
+
+			
+			printf("%5d\t%8s\t%8s\t%8s\t%8d\t%8c\n",vect[i].matriz,vect[i].nombre,vect[i].appaterno,vect[i].apmaterno,vect[i].edad,vect[i].sexo);
 		}
 	}
 }
@@ -282,17 +276,13 @@ void imparch(char nombre[])
 	}
 	
 	Tdato reg;
-	
+	printf("%5s\t%8s\t%8s\t%8s\t%8s\t%8s\t%8s\n","No.Registro","Matricula","Nombre","Ap Paterno","Ap Materno","Edad","Sexo");
 	fread(&reg, sizeof(Tdato), 1, arch);
 	while(!feof(arch))
 	{
-		printf("Status: %d\n", reg.status);
-		printf("Matricula: %d\n", reg.matriz);
-		printf("Nombre: %s\n", reg.nombre);
-		printf("Apellido paterno: %s\n", reg.appaterno);
-		printf("Apellido materno: %s\n", reg.apmaterno);
-		printf("Edad: %d\n", reg.edad);
-		printf("Sexo: %c\n\n", reg.sexo);
+
+		
+		printf("%5d\t%8d\t%8s\t%8s\t%8s\t%8d\t%8c\n",reg.status,reg.matriz,reg.nombre,reg.apmaterno,reg.appaterno,reg.edad,reg.sexo);
 		
 		fread(&reg, sizeof(Tdato), 1, arch);
 	}
