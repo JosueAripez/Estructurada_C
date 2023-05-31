@@ -4,6 +4,7 @@
 #include <math.h>
 #include <time.h>
 #include <stdbool.h>
+#include<ctype.h>
 
 #define TRUE 1
 #define FALSE 0
@@ -36,27 +37,28 @@ bool ValidTxt(char *cadena)
 	return status;
 }
 
-int Val_Int(int ri,int rf,char msge[],char msgeError[])
+int vali_num(int ri, int rf, char msg[])
 {
 	int num;
-	char xnum[30];
+	char letra[20];
 	
 	do
 	{
-		puts(msge);
+		printf("%s: ", msg);
 		fflush(stdin);
-		gets(xnum);
-		num = atoi(xnum);
+		gets(letra);
+		num = atoi(letra);
 		
-		if(num < ri || num > rf)
+		if (num < ri || num > rf)
 		{
-			printf("%s",msgeError);
-			printf("\n");
+			printf("Numero fuera de rango (%d a %d)", ri, rf);
+			system("pause");
 		}
-	}while(num < ri || num > rf);
-	
+	}
+	while (num < ri || num > rf);
 	return num;
 }
+
 
 long Val_Long(long ri,long rf,char msge[],char msgeError[])
 {
