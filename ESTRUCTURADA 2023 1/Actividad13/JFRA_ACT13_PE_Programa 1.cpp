@@ -1,10 +1,4 @@
 #include "Rojapez.h"
-//#define N 2500
-
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include<ctype.h>
 
 typedef struct _tdato
 {
@@ -23,7 +17,6 @@ Tdato add_manual(Tdato reg, int j);
 void impreg(Tdato reg);
 int menu();
 void opcion();
-int vali_num(int ri, int rf, char msg[]);
 int buscar(Tdato vec[], int tam, int id);
 void eliminar(Tdato vec[], int tam, int id, Tdato reg);
 void crear_tex(Tdato vect[], int tam, char nombre[]);
@@ -44,9 +37,9 @@ Tdato add_auto(Tdato reg)
 {
 	
 	int i, n, x;
-	char nombres[][30] = {"Gerardo", "Eduardo", "Jose", "Alberto", "Pedro", "Roberto", "Ricardo", "Alexis"};
-	char appaterno[][30] = {"Lopez", "Robles", "Yepez", "Tsuchiya", "Osuna", "Gonzales", "Silva", "Serrano"};
-	char apmaterno[][30] = {"Navarro", "Flores", "Quintero", "Amador", "Ortega", "Medina", "Duarte", "Delgado"};
+	char nombres[][30] = {"Josue","Francisco","Blanca","Brisa","Fernanda","Abraham","Daniel","Jessica","Estela","Maria","Allison"};
+	char appaterno[][30] = {"Bustamante","Trujillo","Ybarra","Robins","Wilson","Grey","Shepherd","Herrera"};
+	char apmaterno[][30] = {"Rojas","Aripez","Rojapez","BaÃ±uelos","Escamilla","Beristain","Leyva"};
 	
 	reg.status = 1;
 	reg.matriz = (rand()%4001) + 1000;
@@ -76,7 +69,7 @@ Tdato add_manual(Tdato reg, int j)
 	fflush(stdin);
 	gets(reg.nombre);
 	system("CLS");
-	printf("\nApellido Pater: ");
+	printf("\nApellido Paterno: ");
 	fflush(stdin);
 	gets(reg.appaterno);
 	system("CLS");
@@ -121,7 +114,7 @@ int buscar(Tdato vec[], int tam, int id)
 			return i;
 		}
 	}
-	printf("No existe el ID\n");
+	printf("Matricula inexsistente\n");
 	j = -1;
 	return j;
 	
@@ -150,7 +143,7 @@ void eliminar(Tdato vec[], int tam, int id, Tdato reg)
 {
 	int x, lugar;
 	lugar = buscar(vec, tam, id);
-	x = vali_num(1, 2,"\nDesea eliminar este registro?\n1.- Si\n2.- No: ");
+	x = vali_num(1, 2,"\n¿Eliminar Registro? | 1.- SI | 2.- NO | ");
 	if(x == 1)
 	{
 		vec[lugar].status = 0;
@@ -319,7 +312,7 @@ void opcion()
 	{
 		system("CLS");
 		menu();
-		op = vali_num(0, 10, "Escoge una opcion: ");
+		op = vali_num(0, 10, "Eliga una opcion ");
 		
 		switch(op)
 		{
@@ -335,26 +328,24 @@ void opcion()
 				break;
 				
 			case 2:
-				//editar registro
-				id = vali_num(1000, 5000, "Ingrese el ID a buscar: ");
+				id = vali_num(1000, 5000, "Matricula: ");
 				editar(vect, j, id);
 				break;
 				
 			case 3:
-				id = vali_num(1000, 5000, "Ingrese el ID a buscar: ");
+				id = vali_num(1000, 5000, "Matricula:");
 				eliminar(vect, j, id, reg);
 				j--;
 				system("pause");
 				break;
 				
 			case 4:
-				id = vali_num(1000, 5000, "Ingrese el ID a buscar: ");
+				id = vali_num(1000, 5000, "Matricula: ");
 				buscar(vect, j, id);
 				break;
 			case 5:
-				//ordenar
 				ordenar(vect, j);
-				printf("Se han ordenado por orden de matricula\n");
+				printf("Ordenado\n");
 				system("pause");
 				break;
 				
@@ -370,7 +361,6 @@ void opcion()
 				system("pause");
 				break;
 			case 8:
-				//ver archivo de texto
 				imparch(nombre_txt);
 				break;
 			case 9:
@@ -379,37 +369,14 @@ void opcion()
 				system("pause");
 				break;
 			case 10:
-				//cargar arch binario
 				imparch(nombre_bin);
 				break;
 			case 0:
-				printf("Gracias por participar");
+				
 				op = 0;
 				break;
 		}
 	} 
-}
-
-int vali_num(int ri, int rf, char msg[])
-{
-	int num;
-	char letra[20];
-	
-	do
-	{
-		printf("%s: ", msg);
-		fflush(stdin);
-		gets(letra);
-		num = atoi(letra);
-		
-		if (num < ri || num > rf)
-		{
-			printf("Numero fuera de rango (%d a %d)", ri, rf);
-			system("pause");
-		}
-	}
-	while (num < ri || num > rf);
-	return num;
 }
 
 void nomtex(char nombre[], int tam)
@@ -487,7 +454,7 @@ void editar(Tdato vect[], int tam, int id)
 		
 	
 			printf("\n1.- Status\n2.- Matricula\n3.- Nombre\n4.- Apellido paterno\n5.- Apellido materno\n6.- Edad\n7.- Sexo\n8.- Ninguno\n ");
-			op = vali_num(1, 8, "Que campo desea editar?: ");
+			op = vali_num(1, 8, "Eliga campo a editar: ");
 	
 			switch(op)
 			{
