@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/jossu/OneDrive/Documentos/Estructurada_C/ESTRUCTURADA 2023 1/Actividad14",
-      "program": "c:/Users/jossu/OneDrive/Documentos/Estructurada_C/ESTRUCTURADA 2023 1/Actividad14/build/Debug/outDebug",
+      "cwd": "c:/Users/jossu/OneDrive/Documentos/Estructurada_C/ESTRUCTURADA 2023 1/actividad14m",
+      "program": "c:/Users/jossu/OneDrive/Documentos/Estructurada_C/ESTRUCTURADA 2023 1/actividad14m/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
